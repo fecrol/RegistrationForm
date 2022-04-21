@@ -81,7 +81,7 @@ function checkIfEmailExists(email) {
 
 function registerUser(forename, surname, email, password, confrimPassword) {
 
-    if(verifyString(forename) && verifyString(surname) && verifyEmail(email) && verifyPassword(password) && verifyPasswordsMatch(password, confrimPassword)) {
+    if(!checkIfEmailExists(email) && verifyString(forename) && verifyString(surname) && verifyEmail(email) && verifyPassword(password) && verifyPasswordsMatch(password, confrimPassword)) {
         
         let user = {forename: forename,
         surname: surname,
