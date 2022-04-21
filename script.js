@@ -90,6 +90,5 @@ function registerUser(forename, surname, email, password, confrimPassword) {
         };
         
         localStorage.setItem(localStorage.length, JSON.stringify(user));
-        console.log("success");
     }
 }
