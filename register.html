@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/48b1b4cd52.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./styles.css">
     <title>Sign Up</title>
 </head>
@@ -15,7 +16,12 @@
                 <input type="text" name="forename" id="forename" placeholder="Forename">
                 <input type="text" name="surname" id="surname" placeholder="Surname">
                 <input type="email" name="email" id="email" placeholder="Email">
+                <p><i class="fa-solid fa-xmark"></i> Password is at least 6 characters long.</p>
+                <p><i class="fa-solid fa-xmark"></i> Password contains at least 1 uppercase character.</p>
+                <p><i class="fa-solid fa-xmark"></i> Password contains at least 1 number.</p>
+                <p><i class="fa-solid fa-xmark"></i> Password contains at least 1 of these special characters (!@#$%^&')</p>
                 <input type="password" name="pass1" id="pass1" placeholder="Password">
+                <p><i class="fa-solid fa-xmark"></i> Passwords match.</p>
                 <input type="password" name="pass2" id="pass2" placeholder="Confirm Password">
                 <input type="submit" name="submit" id="submit" value="Sign Up">
             </form>
