@@ -1,21 +1,3 @@
-function load(url="login.html") {
-    /*
-    Loads to a specified page. loads to login page if page not specified.
-    */
-
-    window.location.href = "./" + url;
-}
-
-function redirect() {
-    /*
-    Redirects user to login page if email is not set in local storage.
-    */
-    
-    if(sessionStorage.getItem("email") == null) {
-        load();
-    }
-}
-
 function verifyEmail(email) {
     /*
     Checks if the email address is valid to prevent invalid email input.
@@ -32,19 +14,33 @@ function verifyPassword(password) {
     case letter, number and special character to prevent weak passwords.
     */
 
-    let validateLength = password.length >= 6;
-    let containsUppercase = /[A-Z]+/.test(password);
-    let containsNum = /\d/.test(password);
-    let containsSpecial = /[!@#$%^&']+/.test(password);
+    let validateLength = verifyPasswordLentgh();
+    let containsUppercase = verifyPasswordContainsUpper();
+    let containsNum = verifyPasswordContainsNum();
+    let containsSpecial = verifyPasswordContainsSpecial();
     let passwordIsValid = validateLength && containsUppercase && containsNum && containsSpecial;
 
-    return {
-        "validLength": validateLength, 
-        "containsUpper": containsUppercase, 
-        "containsNum": containsNum, 
-        "containsSpecial": containsSpecial,
-        "passwordIsValid": passwordIsValid
-    };
+    return passwordIsValid;
+}
+
+function verifyPasswordLentgh(password) {
+
+    return password.length >= 6;
+}
+
+function verifyPasswordContainsUpper(password) {
+    
+    return /[A-Z]+/.test(password);
+}
+
+function verifyPasswordContainsNum(password) {
+
+    return /\d/.test(password);
+}
+
+function verifyPasswordContainsSpecial(password) {
+
+    return /[!@#$%^&']+/.test(password);
 }
 
 function verifyPasswordsMatch(password, confrimPassword) {
@@ -69,7 +65,7 @@ function checkIfEmailExists(email) {
     
     try {
         for(const key in localStorage) {
-            if(email === JSON.parse(localStorage.getItem(key))["email"]) {
+            if(email === JSON.parse(sessionStorage.getItem(key))["email"]) {
                 return true;
             }
         }
@@ -89,6 +85,6 @@ function registerUser(forename, surname, email, password, confrimPassword) {
         password: password
         };
         
-        localStorage.setItem(localStorage.length, JSON.stringify(user));
+        localStorage.setItem(sessionStorage.length, JSON.stringify(user));
     }
 }
