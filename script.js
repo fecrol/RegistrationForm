@@ -14,10 +14,10 @@ function verifyPassword(password) {
     case letter, number and special character to prevent weak passwords.
     */
 
-    let validateLength = verifyPasswordLentgh();
-    let containsUppercase = verifyPasswordContainsUpper();
-    let containsNum = verifyPasswordContainsNum();
-    let containsSpecial = verifyPasswordContainsSpecial();
+    let validateLength = verifyPasswordLentgh(password);
+    let containsUppercase = verifyPasswordContainsUpper(password);
+    let containsNum = verifyPasswordContainsNum(password);
+    let containsSpecial = verifyPasswordContainsSpecial(password);
     let passwordIsValid = validateLength && containsUppercase && containsNum && containsSpecial;
 
     return passwordIsValid;
@@ -86,5 +86,69 @@ function registerUser(forename, surname, email, password, confrimPassword) {
         };
         
         localStorage.setItem(sessionStorage.length, JSON.stringify(user));
+    }
+}
+
+function register() {
+
+    const email = document.getElementById("email").value;
+    const forename = document.getElementById("forename").value;
+    const surname = document.getElementById("surname").value;
+    const password = document.getElementById("pass1").value;
+    const confrimPassword = document.getElementById("pass2").value;
+
+    registerUser(forename, surname, email, password, confrimPassword);
+}
+
+function updatePasswordsMatchIcon() {
+
+    const passwordEl = document.getElementById("pass1");
+    const confirmPassEl = document.getElementById("pass2");
+    const passMatch = document.getElementById("pass-match");
+
+    let passwordsMatch = verifyPasswordsMatch(passwordEl.value, confirmPassEl.value);
+
+    if (passwordsMatch) {
+        passMatch.classList.remove("fa-xmark");
+        passMatch.classList.add("fa-check");
+        passMatch.style.color = "#00FF00";
+    }
+    else {
+        passMatch.classList.remove("fa-check");
+        passMatch.classList.add("fa-xmark");
+        passMatch.style.color = "#ee3344";
+    }
+}
+
+function updateVerifyPasswordIcons() {
+
+    const passwordEl = document.getElementById("pass1");
+    const passwordVal = passwordEl.value;
+
+    const parameters = [
+        document.getElementById("pass-length"),
+        document.getElementById("char-upper"),
+        document.getElementById("char-num"),
+        document.getElementById("char-special")
+    ]
+    
+    const parameterOutput = [
+        verifyPasswordLentgh(passwordVal),
+        verifyPasswordContainsUpper(passwordVal),
+        verifyPasswordContainsNum(passwordVal),
+        verifyPasswordContainsSpecial(passwordVal)
+    ]
+
+    for(let i = 0; i < parameterOutput.length; i++) {
+        if(parameterOutput[i]) {
+            parameters[i].classList.remove("fa-xmark");
+            parameters[i].classList.add("fa-check");
+            parameters[i].style.color = "#00FF00";
+        }
+        else {
+            parameters[i].classList.remove("fa-check");
+            parameters[i].classList.add("fa-xmark");
+            parameters[i].style.color = "#ee3344";
+        }
     }
 }
