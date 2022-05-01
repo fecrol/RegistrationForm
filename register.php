@@ -1,3 +1,8 @@
+<?php
+session_start();
+require("./functions.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +18,12 @@
     <div class="flex-container">
         <div class="form">
             <h1>SIGN UP</h1>
-            <form action="" method="post">
+            <form action="<?php registerUser(); ?>" method="post">
+                <p><i id="forename-str" class="fa-solid fa-xmark"></i> Valid forename.</p>
                 <input type="text" name="forename" id="forename" placeholder="Forename">
+                <p><i id="surname-str" class="fa-solid fa-xmark"></i> Valid surname.</p>
                 <input type="text" name="surname" id="surname" placeholder="Surname">
+                <p><i id="valid-email" class="fa-solid fa-xmark"></i> Valid email address.</p>
                 <input type="email" name="email" id="email" placeholder="Email">
                 <p><i id="pass-length" class="fa-solid fa-xmark"></i> Password is at least 6 characters long.</p>
                 <p><i id="char-upper" class="fa-solid fa-xmark"></i> Password contains at least 1 uppercase character.</p>
