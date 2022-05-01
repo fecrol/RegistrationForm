@@ -61,45 +61,6 @@ function verifyString(string) {
     return pattern.test(string) ? false : true;
 }
 
-function checkIfEmailExists(email) {
-    
-    try {
-        for(const key in localStorage) {
-            if(email === JSON.parse(sessionStorage.getItem(key))["email"]) {
-                return true;
-            }
-        }
-    }
-    catch {
-        return false;
-    }
-}
-
-function registerUser(forename, surname, email, password, confrimPassword) {
-
-    if(!checkIfEmailExists(email) && verifyString(forename) && verifyString(surname) && verifyEmail(email) && verifyPassword(password) && verifyPasswordsMatch(password, confrimPassword)) {
-        
-        let user = {forename: forename,
-        surname: surname,
-        email: email,
-        password: password
-        };
-        
-        localStorage.setItem(sessionStorage.length, JSON.stringify(user));
-    }
-}
-
-function register() {
-
-    const email = document.getElementById("email").value;
-    const forename = document.getElementById("forename").value;
-    const surname = document.getElementById("surname").value;
-    const password = document.getElementById("pass1").value;
-    const confrimPassword = document.getElementById("pass2").value;
-
-    registerUser(forename, surname, email, password, confrimPassword);
-}
-
 function updatePasswordsMatchIcon() {
 
     const passwordEl = document.getElementById("pass1");
