@@ -13,7 +13,7 @@
     <div class="flex-container">
         <div class="form">
             <h1>SIGN UP</h1>
-            <form>
+            <form action="" method="post">
                 <input type="text" name="forename" id="forename" placeholder="Forename">
                 <input type="text" name="surname" id="surname" placeholder="Surname">
                 <input type="email" name="email" id="email" placeholder="Email">
@@ -24,7 +24,7 @@
                 <input type="password" name="pass1" id="pass1" placeholder="Password" onkeyup="updateVerifyPasswordIcons()">
                 <p><i id="pass-match" class="fa-solid fa-xmark"></i> Passwords match.</p>
                 <input type="password" name="pass2" id="pass2" placeholder="Confirm Password" onkeyup="updatePasswordsMatchIcon()">
-                <input type="submit" name="submit" id="submit" value="Sign Up" onclick="register()">
+                <input type="submit" name="submit" id="submit" value="Sign Up">
             </form>
             <p>Already have an account? <a href="#">Sign in here</a></p>
         </div>
