@@ -43,6 +43,10 @@ body {
     color: #666666;
 }
 
+.form p i {
+    color: #ee3344;
+}
+
 .form p a {
     text-decoration: none;
 }
