@@ -77,6 +77,7 @@ function validateRegForm($forename, $surname, $email, $password, $confirmPasswor
     }
     else {
         $_SESSION["error"] = true;
+        $_SESSION["data"] = ["forename" => $forename, "surname" => $surname, "email" => $email];
         return false;
     }
 }
@@ -85,11 +86,11 @@ function registerUser() {
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $forename = $_POST["forename"];
-        $surname = $_POST["surname"];
-        $email = $_POST["email"];
-        $password = $_POST["pass1"];
-        $confirmPassword = $_POST["pass2"];
+        $forename = htmlspecialchars($_POST["forename"]);
+        $surname = htmlspecialchars($_POST["surname"]);
+        $email = htmlspecialchars($_POST["email"]);
+        $password = htmlspecialchars($_POST["pass1"]);
+        $confirmPassword = htmlspecialchars($_POST["pass2"]);
 
         $formIsValid = validateRegForm($forename, $surname, $email, $password, $confirmPassword);
 
