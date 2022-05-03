@@ -11,6 +11,12 @@ function load($page) {
     exit();
 }
 
+function verifyEmail($email) {
+
+    $pattern = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
+    return preg_match($pattern, $email);
+}
+
 function verifyString($string) {
 
     $pattern = "/[`!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?~\d ]/";
