@@ -14,36 +14,36 @@ function load($page) {
 function verifyEmail($email) {
 
     $pattern = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
-    return preg_match($pattern, $email);
+    return preg_match($pattern, $email) == 1 ? true : false;
 }
 
 function verifyString($string) {
 
     $pattern = "/[`!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?~\d ]/";
-    return preg_match($patern, $string);
+    return preg_match($patern, $string) == 1 ? false : true;
 }
 
 function verifyPasswordLength($password) {
     
-    return strlen($password) >= 6;
+    return strlen($password) >= 6 ? true : false;
 }
 
 function verifyPasswordContainsUpper($password) {
 
     $pattern = "/[A-Z]+/";
-    return preg_match($pattern, $password);
+    return preg_match($pattern, $password) == 1 ? true : false;
 }
 
 function verifyPasswordContainsNum($password) {
 
     $pattern = "/\d/";
-    return preg_match($pattern, $password);
+    return preg_match($pattern, $password) == 1 ? true : false;
 }
 
 function verifyPasswordContainsSpecial($password) {
 
-    $patern = "/[!@#$%^&]+/";
-    return preg_match($pattern, $password);
+    $pattern = "/[!@#$%^&]+/";
+    return preg_match($pattern, $password) == 1 ? true : false;
 }
 
 function  verifyPasswordsMatch($password1, $password2) {
@@ -66,13 +66,12 @@ function validateRegForm($forename, $surname, $email, $password, $confirmPasswor
     $validForename = verifyString($forename);
     $validSurname = verifyString($surname);
     $validEmail = verifyEmail($email);
-    $validPassLength = verifyPasswordLength($password);
-    $passContainsUpper = verifyPasswordContainsUpper($password);
-    $passContainsNum = verifyPasswordContainsNum($password);
-    $passContainsSpecial = verifyPasswordContainsSpecial($password);
+    $validPassword = verifyPassword($password);
     $passwordsMatch = verifyPasswordsMatch($password, $confirmPassword);
 
-    if($validForename && $validSurname && $validPassLength && $passContainsUpper && $passContainsNum && $passContainsSpecial && $passwordsMatch) {
+    if($validForename && $validSurname && $validPassword && $passwordsMatch) {
+        $_SESSION["error"] = false;
+        $_SESSION["data"] = [];
         return true;
     }
     else {
