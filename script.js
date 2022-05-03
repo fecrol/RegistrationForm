@@ -61,13 +61,70 @@ function verifyString(string) {
     return pattern.test(string) ? false : true;
 }
 
+function updateValidForenameIcon() {
+
+    const forename = document.getElementById("forename").value;
+    const icon = document.getElementById("forename-str");
+
+    let validString = verifyString(forename);
+
+    if(validString && forename.length > 0) {
+        icon.classList.remove("fa-xmark");
+        icon.classList.add("fa-check");
+        icon.style.color = "#00FF00";
+    }
+    else {
+        icon.classList.remove("fa-check");
+        icon.classList.add("fa-xmark");
+        icon.style.color = "#ee3344";
+    }
+}
+
+function updateValidSurnameIcon() {
+
+    const surname = document.getElementById("surname").value;
+    const icon = document.getElementById("surname-str");
+
+    let validString = verifyString(surname);
+
+    if(validString && surname.length > 0) {
+        icon.classList.remove("fa-xmark");
+        icon.classList.add("fa-check");
+        icon.style.color = "#00FF00";
+    }
+    else {
+        icon.classList.remove("fa-check");
+        icon.classList.add("fa-xmark");
+        icon.style.color = "#ee3344";
+    }
+}
+
+function updateValidEmailIcon() {
+
+    const email = document.getElementById("email").value;
+    const icon = document.getElementById("valid-email");
+
+    let validEmail = verifyEmail(email);
+
+    if(validEmail && email.length > 0) {
+        icon.classList.remove("fa-xmark");
+        icon.classList.add("fa-check");
+        icon.style.color = "#00FF00";
+    }
+    else {
+        icon.classList.remove("fa-check");
+        icon.classList.add("fa-xmark");
+        icon.style.color = "#ee3344";
+    }
+}
+
 function updatePasswordsMatchIcon() {
 
-    const passwordEl = document.getElementById("pass1");
-    const confirmPassEl = document.getElementById("pass2");
+    const password = document.getElementById("pass1").value;
+    const confirmPass = document.getElementById("pass2").value;
     const passMatch = document.getElementById("pass-match");
 
-    let passwordsMatch = verifyPasswordsMatch(passwordEl.value, confirmPassEl.value);
+    let passwordsMatch = verifyPasswordsMatch(password, confirmPass);
 
     if (passwordsMatch) {
         passMatch.classList.remove("fa-xmark");
@@ -83,22 +140,21 @@ function updatePasswordsMatchIcon() {
 
 function updateVerifyPasswordIcons() {
 
-    const passwordEl = document.getElementById("pass1");
-    const passwordVal = passwordEl.value;
+    const passwordVal = document.getElementById("pass1").value;
 
     const parameters = [
         document.getElementById("pass-length"),
         document.getElementById("char-upper"),
         document.getElementById("char-num"),
         document.getElementById("char-special")
-    ]
+    ];
     
     const parameterOutput = [
         verifyPasswordLentgh(passwordVal),
         verifyPasswordContainsUpper(passwordVal),
         verifyPasswordContainsNum(passwordVal),
         verifyPasswordContainsSpecial(passwordVal)
-    ]
+    ];
 
     for(let i = 0; i < parameterOutput.length; i++) {
         if(parameterOutput[i]) {
