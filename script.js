@@ -169,3 +169,53 @@ function updateVerifyPasswordIcons() {
         }
     }
 }
+
+function fetchError() {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "./getError.php", false);
+    xhr.send();
+    let errorData = JSON.parse(xhr.responseText);
+    return errorData;
+}
+
+function displayError() {
+    
+    const responseEl = document.getElementById("response-card");
+    
+    responseEl.innerHTML = "";
+    
+    responseEl.style.background = "#ee3344";
+    
+    responseEl.innerHTML =
+    `
+    <h1>An Error has occured! Please try again.</h1>
+    `;
+}
+
+function displaySuccess() {
+    
+    const responseEl = document.getElementById("response-card");
+    
+    responseEl.innerHTML = "";
+    
+    responseEl.style.background = "#32CD32";
+    
+    responseEl.innerHTML =
+    `
+    <h1>You have registered successfully!</h1>
+    `;
+}
+
+function displayResponse(response) {
+
+    if(response["error"] == true) {
+        console.log(response);
+        displayError();
+    }
+    
+    if(response["error"] == false) {
+        console.log(response);
+        displaySuccess();
+    }
+}
