@@ -61,16 +61,37 @@ function verifyPassword($password) {
     return $validateLength && $containsUpper && $containsNum && $containsSpecial;
 }
 
-function validateRegForm() {
+function validateRegForm($forename, $surname, $email, $password, $confirmPassword) {
 
-    return false;
+    $validForename = verifyString($forename);
+    $validSurname = verifyString($surname);
+    $validEmail = verifyEmail($email);
+    $validPassLength = verifyPasswordLength($password);
+    $passContainsUpper = verifyPasswordContainsUpper($password);
+    $passContainsNum = verifyPasswordContainsNum($password);
+    $passContainsSpecial = verifyPasswordContainsSpecial($password);
+    $passwordsMatch = verifyPasswordsMatch($password, $confirmPassword);
+
+    if($validForename && $validSurname && $validPassLength && $passContainsUpper && $passContainsNum && $passContainsSpecial && $passwordsMatch) {
+        return true;
+    }
+    else {
+        $_SESSION["error"] = true;
+        return false;
+    }
 }
 
 function registerUser() {
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $formIsValid = validateRegForm();
+        $forename = $_POST["forename"];
+        $surname = $_POST["surname"];
+        $email = $_POST["email"];
+        $password = $_POST["pass1"];
+        $confirmPassword = $_POST["pass2"];
+
+        $formIsValid = validateRegForm($forename, $surname, $email, $password, $confirmPassword);
 
         if($formIsValid) {
             load("./register.php");
