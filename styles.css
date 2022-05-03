@@ -21,7 +21,7 @@ body {
 }
 
 .form {
-    width: 30%;
+    width: 90%;
     padding: 1.5rem;
     background: #cccccc;
     border-radius: 2rem;
@@ -77,4 +77,16 @@ body {
 
 .form form input[type="submit"]:hover {
     cursor: pointer;
+}
+
+@media (min-width:950px) {
+    .form {
+        width: 50%;
+    }
+}
+
+@media (min-width:1560px) {
+    .form {
+        width: 30%;
+    }
 }
