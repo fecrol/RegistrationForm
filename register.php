@@ -16,6 +16,10 @@ require("./functions.php");
 </head>
 <body>
     <div class="flex-container">
+        <div id="response-card" class="response-card">
+
+        </div>
+
         <div class="form">
             <h1>SIGN UP</h1>
             <form action="<?php registerUser(); ?>" method="post">
@@ -37,5 +41,11 @@ require("./functions.php");
             <p>Already have an account? <a href="#">Sign in here</a></p>
         </div>
     </div>
+
+    <script>
+        response = fetchError();
+
+        displayResponse(response);
+    </script>
 </body>
 </html>
