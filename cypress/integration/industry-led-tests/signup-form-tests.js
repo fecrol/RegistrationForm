@@ -169,4 +169,144 @@ describe("sign up form tests", () => {
         cy.get("#pass-length").should("have.class", "fa-xmark")
         cy.get("#pass-length").should("not.have.class", "fa-check")
     })
+
+    it("checks password contains at least 1 uppercase character is validated", () => {
+
+        const validPass = "PasS"
+        const badPass = "pass"
+
+        // Checks that invalid icon is displayed
+        cy.get("#char-upper").should("have.class", "fa-xmark")
+        cy.get("#char-upper").should("not.have.class", "fa-check")
+
+        // Checks if valid icon is displayed when password contains an uppercase character
+        cy.get("#pass1").type(validPass)
+        cy.get("#char-upper").should("have.class", "fa-check")
+        cy.get("#char-upper").should("not.have.class", "fa-xmark")
+
+        // Checks if invalid icon is displayed when password does not contain an uppercase character
+        cy.get("#pass1").clear()
+        cy.get("#pass1").type(badPass)
+        cy.get("#char-upper").should("have.class", "fa-xmark")
+        cy.get("#char-upper").should("not.have.class", "fa-check")
+    })
+
+    it("checks password contains at least 1 number is validated", () => {
+
+        const validPass = "pa55"
+        const badPass = "pass"
+
+        // Checks that invalid icon is displayed
+        cy.get("#char-num").should("have.class", "fa-xmark")
+        cy.get("#char-num").should("not.have.class", "fa-check")
+
+        // Checks if valid icon is displayed when password contains a number
+        cy.get("#pass1").type(validPass)
+        cy.get("#char-num").should("have.class", "fa-check")
+        cy.get("#char-num").should("not.have.class", "fa-xmark")
+
+        // Checks if invalid icon is displayed when password does not contain a number
+        cy.get("#pass1").clear()
+        cy.get("#pass1").type(badPass)
+        cy.get("#char-num").should("have.class", "fa-xmark")
+        cy.get("#char-num").should("not.have.class", "fa-check")
+    })
+
+    it("checks password contains at least 1 special character is validated", () => {
+        /*
+        The valid special characters are: !@#$%^&'
+        */
+
+        const validPass = "p@$$!"
+        const validPass2 = "#%^'~"
+        const badPass = "[{(~;"
+
+        // Checks that invalid icon is displayed
+        cy.get("#char-special").should("have.class", "fa-xmark")
+        cy.get("#char-special").should("not.have.class", "fa-check")
+
+        // Checks if valid icon is displayed when password contains a valid special character
+        cy.get("#pass1").type(validPass)
+        cy.get("#char-special").should("have.class", "fa-check")
+        cy.get("#char-special").should("not.have.class", "fa-xmark")
+
+        // Checks if valid icon is displayed when password contains a valid special character
+        cy.get("#pass1").clear()
+        cy.get("#pass1").type(validPass2)
+        cy.get("#char-special").should("have.class", "fa-check")
+        cy.get("#char-special").should("not.have.class", "fa-xmark")
+
+        // Checks if invalid icon is displayed when password does not contain a valid special character
+        cy.get("#pass1").clear()
+        cy.get("#pass1").type(badPass)
+        cy.get("#char-special").should("have.class", "fa-xmark")
+        cy.get("#char-special").should("not.have.class", "fa-check")
+    })
+
+    it("checks multiple password validations are preformed", function() {
+
+        const passLengthAndUpper = "Password"
+        const passLengthUpperAndNum = "Passw0rd"
+        const passUpperNumAndSpecial = "P@55w"
+
+        // Checks that invalid icon is displayed for all password validations
+        cy.get("#pass-length").should("have.class", "fa-xmark")
+        cy.get("#char-upper").should("have.class", "fa-xmark")
+        cy.get("#char-num").should("have.class", "fa-xmark")
+        cy.get("#char-special").should("have.class", "fa-xmark")
+
+        // Checks valid icon is displayed for length and upper charatcer
+        cy.get("#pass1").type(passLengthAndUpper)
+        cy.get("#pass-length").should("have.class", "fa-check")
+        cy.get("#char-upper").should("have.class", "fa-check")
+        cy.get("#char-num").should("have.class", "fa-xmark")
+        cy.get("#char-special").should("have.class", "fa-xmark")
+
+        // Checks valid icon is displayed for length, upper charatcer and number
+        cy.get("#pass1").clear()
+        cy.get("#pass1").type(passLengthUpperAndNum)
+        cy.get("#pass-length").should("have.class", "fa-check")
+        cy.get("#char-upper").should("have.class", "fa-check")
+        cy.get("#char-num").should("have.class", "fa-check")
+        cy.get("#char-special").should("have.class", "fa-xmark")
+
+        // Checks valid icon is displayed for upper charatcer, number and special character
+        cy.get("#pass1").clear()
+        cy.get("#pass1").type(passUpperNumAndSpecial)
+        cy.get("#pass-length").should("have.class", "fa-xmark")
+        cy.get("#char-upper").should("have.class", "fa-check")
+        cy.get("#char-num").should("have.class", "fa-check")
+        cy.get("#char-special").should("have.class", "fa-check")
+
+        // Checks valid icon is displayed for all fields
+        cy.get("#pass1").clear()
+        cy.get("#pass1").type(this.password)
+        cy.get("#pass-length").should("have.class", "fa-check")
+        cy.get("#char-upper").should("have.class", "fa-check")
+        cy.get("#char-num").should("have.class", "fa-check")
+        cy.get("#char-special").should("have.class", "fa-check")
+    })
+
+    it("checks passwords match is validated", function() {
+
+        const notMatchingPass = "Password"
+
+        // Checks that invalid icon is displayed
+        cy.get("#pass-match").should("have.class", "fa-xmark")
+        cy.get("#pass-match").should("not.have.class", "fa-check")
+
+        // Checks invalid icon is displayed when passwords are not matching
+        cy.get("#pass1").type(this.password)
+        cy.get("#pass2").type(notMatchingPass)
+        cy.get("#pass-match").should("have.class", "fa-xmark")
+        cy.get("#pass-match").should("not.have.class", "fa-check")
+
+        // Checks valid icon is displayed when passwords are matching
+        cy.get("#pass1").clear()
+        cy.get("#pass2").clear()
+        cy.get("#pass1").type(this.password)
+        cy.get("#pass2").type(this.confirmPassword)
+        cy.get("#pass-match").should("have.class", "fa-check")
+        cy.get("#pass-match").should("not.have.class", "fa-xmark")
+    })
 })
