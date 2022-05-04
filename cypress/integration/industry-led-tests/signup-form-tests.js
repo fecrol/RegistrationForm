@@ -26,6 +26,7 @@ describe("sign up form tests", () => {
 
     it("does not submit a partially complete form", function () {
 
+        // Submits form with forename only expecitng error message on surname field
         cy.get("#forename").type(this.forename)      
         cy.get("#submit").click();
         cy.get("input:invalid").should("have.length.greaterThan", 0)
@@ -33,6 +34,7 @@ describe("sign up form tests", () => {
             expect($input[0].validationMessage).to.eq("Please fill out this field.")
         })
 
+        // Submits form with forename and surname expecting error message on email field
         cy.get("#surname").type(this.surname)
         cy.get("#submit").click();
         cy.get("input:invalid").should("have.length.greaterThan", 0)
@@ -40,6 +42,7 @@ describe("sign up form tests", () => {
             expect($input[0].validationMessage).to.eq("Please fill out this field.")
         })
 
+        // Submits form with forename, surname, email expecting error message on password field
         cy.get("#email").type(this.email)
         cy.get("#submit").click();
         cy.get("input:invalid").should("have.length.greaterThan", 0)
@@ -47,6 +50,7 @@ describe("sign up form tests", () => {
             expect($input[0].validationMessage).to.eq("Please fill out this field.")
         })
 
+        // Submits form with forename, surname, email and password expecting error message on confirm password field
         cy.get("#pass1").type(this.password)
         cy.get("#submit").click();
         cy.get("input:invalid").should("have.length.greaterThan", 0)
@@ -54,6 +58,7 @@ describe("sign up form tests", () => {
             expect($input[0].validationMessage).to.eq("Please fill out this field.")
         })
 
+        // Submits form with surname, email, password and confirm password expecting error message on forename field
         cy.get("#forename").clear()
         cy.get("#pass2").type(this.confirmPassword)
         cy.get("#submit").click();
