@@ -12,7 +12,7 @@ describe("sign up form tests", () => {
     
     beforeEach(() => {
         cy.visit("http://localhost/_industryled/register.php")
-        cy.viewport(1280, 920)
+        cy.viewport(1080, 920)
     })
 
     it("does not submit an empty form", () => {
