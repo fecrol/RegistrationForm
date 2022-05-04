@@ -309,4 +309,125 @@ describe("sign up form tests", () => {
         cy.get("#pass-match").should("have.class", "fa-check")
         cy.get("#pass-match").should("not.have.class", "fa-xmark")
     })
+
+    it("displays error when form is submitted with invalid forename", function() {
+
+        const badForename = "R0b3rt"
+
+        cy.get("#forename").type(badForename)
+        cy.get("#forename-str").should("have.class", "fa-xmark")
+        
+        cy.get("#surname").type(this.surname)
+        cy.get("#surname-str").should("have.class", "fa-check")
+        
+        cy.get("#email").type(this.email)
+        cy.get("#valid-email").should("have.class", "fa-check")
+        
+        cy.get("#pass1").type(this.password)
+        cy.get("#pass-length").should("have.class", "fa-check")
+        cy.get("#char-upper").should("have.class", "fa-check")
+        cy.get("#char-num").should("have.class", "fa-check")
+        cy.get("#char-special").should("have.class", "fa-check")
+
+        cy.get("#pass2").type(this.confirmPassword)
+        cy.get("#pass-match").should("have.class", "fa-check")
+
+        cy.get("#submit").click()
+
+        cy.get("#response-card").should("have.text", "An Error has occured! Please try again.")
+    })
+
+    
+    it("displays error when form is submitted with invalid surname", function() {
+
+        const badSurname = "5mit|-|"
+
+        cy.get("#forename").type(this.forename)
+        cy.get("#forename-str").should("have.class", "fa-check")
+        
+        cy.get("#surname").type(badSurname)
+        cy.get("#surname-str").should("have.class", "fa-xmark")
+        
+        cy.get("#email").type(this.email)
+        cy.get("#valid-email").should("have.class", "fa-check")
+        
+        cy.get("#pass1").type(this.password)
+        cy.get("#pass-length").should("have.class", "fa-check")
+        cy.get("#char-upper").should("have.class", "fa-check")
+        cy.get("#char-num").should("have.class", "fa-check")
+        cy.get("#char-special").should("have.class", "fa-check")
+
+        cy.get("#pass2").type(this.confirmPassword)
+        cy.get("#pass-match").should("have.class", "fa-check")
+
+        cy.get("#submit").click()
+
+        cy.get("#response-card").should("have.text", "An Error has occured! Please try again.")
+    })
+
+    it("displays error when form is submitted with invalid email", function() {
+
+        const badEmail = "robertsmith96@m.m"
+
+        cy.get("#forename").type(this.forename)
+        cy.get("#forename-str").should("have.class", "fa-check")
+        
+        cy.get("#surname").type(this.surname)
+        cy.get("#surname-str").should("have.class", "fa-check")
+        
+        cy.get("#email").type(badEmail)
+        cy.get("#valid-email").should("have.class", "fa-xmark")
+        
+        cy.get("#pass1").type(this.password)
+        cy.get("#pass-length").should("have.class", "fa-check")
+        cy.get("#char-upper").should("have.class", "fa-check")
+        cy.get("#char-num").should("have.class", "fa-check")
+        cy.get("#char-special").should("have.class", "fa-check")
+
+        cy.get("#pass2").type(this.confirmPassword)
+        cy.get("#pass-match").should("have.class", "fa-check")
+
+        cy.get("#submit").click()
+
+        cy.get("#response-card").should("have.text", "An Error has occured! Please try again.")
+    })
+
+    it("displays error on email without @ symbol", function() {
+        
+        const badEmail = "robertsmith96m.m"
+
+        cy.get("#forename").type(this.forename)
+        cy.get("#forename-str").should("have.class", "fa-check")
+        
+        cy.get("#surname").type(this.surname)
+        cy.get("#surname-str").should("have.class", "fa-check")
+        
+        cy.get("#email").type(badEmail)
+        cy.get("#valid-email").should("have.class", "fa-xmark")
+        
+        cy.get("#pass1").type(this.password)
+        cy.get("#pass-length").should("have.class", "fa-check")
+        cy.get("#char-upper").should("have.class", "fa-check")
+        cy.get("#char-num").should("have.class", "fa-check")
+        cy.get("#char-special").should("have.class", "fa-check")
+
+        cy.get("#pass2").type(this.confirmPassword)
+        cy.get("#pass-match").should("have.class", "fa-check")
+
+        cy.get("#submit").click()
+
+        cy.get("input:invalid").should("have.length.greaterThan", 0)
+        cy.get("#email").then(($input) => {
+            expect($input[0].validationMessage).to.eq("Please include an '@' in the email address. '" + badEmail + "' is missing an '@'.")
+        })
+    })
+
+    /*it("displays error when form is submitted with invalid password", function() {
+
+    })
+
+    it("displays error when form is submitted with invalid confirm password", function() {
+
+    })
+    */
 })
