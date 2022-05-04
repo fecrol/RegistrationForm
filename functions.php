@@ -20,7 +20,7 @@ function verifyEmail($email) {
 function verifyString($string) {
 
     $pattern = "/[`!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?~\d ]/";
-    return preg_match($patern, $string) == 1 ? false : true;
+    return preg_match($pattern, $string) == 1 ? false : true;
 }
 
 function verifyPasswordLength($password) {
@@ -69,7 +69,7 @@ function validateRegForm($forename, $surname, $email, $password, $confirmPasswor
     $validPassword = verifyPassword($password);
     $passwordsMatch = verifyPasswordsMatch($password, $confirmPassword);
 
-    if($validForename && $validSurname && $validPassword && $passwordsMatch) {
+    if($validForename && $validSurname && $validEmail && $validPassword && $passwordsMatch) {
         $_SESSION["error"] = false;
         unset($_SESSION["data"]);
         return true;
