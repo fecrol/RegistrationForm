@@ -187,10 +187,7 @@ function displayError() {
     
     responseEl.style.background = "#ee3344";
     
-    responseEl.innerHTML =
-    `
-    <h1>An Error has occured! Please try again.</h1>
-    `;
+    responseEl.innerHTML = `<h1>An Error has occured! Please try again.</h1>`;
 }
 
 function displaySuccess() {
@@ -201,10 +198,7 @@ function displaySuccess() {
     
     responseEl.style.background = "#32CD32";
     
-    responseEl.innerHTML =
-    `
-    <h1>You have registered successfully!</h1>
-    `;
+    responseEl.innerHTML = `<h1>You have registered successfully!</h1>`;
 }
 
 function displayResponse(response) {
