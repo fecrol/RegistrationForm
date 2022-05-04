@@ -71,7 +71,7 @@ function validateRegForm($forename, $surname, $email, $password, $confirmPasswor
 
     if($validForename && $validSurname && $validPassword && $passwordsMatch) {
         $_SESSION["error"] = false;
-        $_SESSION["data"] = [];
+        unset($_SESSION["data"]);
         return true;
     }
     else {
@@ -99,6 +99,17 @@ function registerUser() {
         else {
             load("./register.php");
         }
+    }
+}
+
+function resetSessionData() {
+
+    if(isset($_SESSION["error"])) {
+        unset($_SESSION["error"]);
+    }
+    
+    if(isset($_SESSION["data"])) {
+        unset($_SESSION["data"]);
     }
 }
 
