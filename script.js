@@ -210,12 +210,26 @@ function displaySuccess() {
 function displayResponse(response) {
 
     if(response["error"] == true) {
-        console.log(response);
         displayError();
+        insertDataToInput(response);
+        updateValidForenameIcon();
+        updateValidSurnameIcon();
+        updateValidEmailIcon();
+        console.log(response);
     }
     
     if(response["error"] == false) {
-        console.log(response);
         displaySuccess();
     }
+}
+
+function insertDataToInput(response) {
+
+    const forenameField = document.getElementById("forename");
+    const surnameField = document.getElementById("surname");
+    const emailField = document.getElementById("email");
+
+    forenameField.value = response["forename"];
+    surnameField.value = response["surname"];
+    emailField.value = response["email"];
 }
