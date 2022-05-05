@@ -176,12 +176,7 @@ function fetchError() {
     
     fetch(url).then(res => res.json()).then(data => {
         
-        if(data["error"] == true) {
-            displayError();
-        }
-        if(data["error"] == false) {
-            displaySuccess();
-        }
+        displayResponse(data);
     })
 }
 
