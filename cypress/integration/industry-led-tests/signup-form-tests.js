@@ -422,12 +422,128 @@ describe("sign up form tests", () => {
         })
     })
 
-    /*it("displays error when form is submitted with invalid password", function() {
+    it("displays error when form is submitted with invalid password", function() {
 
+        const badPass = "Password"
+
+        cy.get("#forename").type(this.forename)
+        cy.get("#forename-str").should("have.class", "fa-check")
+        
+        cy.get("#surname").type(this.surname)
+        cy.get("#surname-str").should("have.class", "fa-check")
+        
+        cy.get("#email").type(this.email)
+        cy.get("#valid-email").should("have.class", "fa-check")
+        
+        cy.get("#pass1").type(badPass)
+        cy.get("#pass-length").should("have.class", "fa-check")
+        cy.get("#char-upper").should("have.class", "fa-check")
+        cy.get("#char-num").should("have.class", "fa-xmark")
+        cy.get("#char-special").should("have.class", "fa-xmark")
+
+        cy.get("#pass2").type(this.confirmPassword)
+        cy.get("#pass-match").should("have.class", "fa-xmark")
+
+        cy.get("#submit").click()
+
+        cy.get("#response-card").should("have.text", "An Error has occured! Please try again.")
     })
 
     it("displays error when form is submitted with invalid confirm password", function() {
 
+        const badConfirmPass = "Pa5sw0rd"
+
+        cy.get("#forename").type(this.forename)
+        cy.get("#forename-str").should("have.class", "fa-check")
+        
+        cy.get("#surname").type(this.surname)
+        cy.get("#surname-str").should("have.class", "fa-check")
+        
+        cy.get("#email").type(this.email)
+        cy.get("#valid-email").should("have.class", "fa-check")
+        
+        cy.get("#pass1").type(this.password)
+        cy.get("#pass-length").should("have.class", "fa-check")
+        cy.get("#char-upper").should("have.class", "fa-check")
+        cy.get("#char-num").should("have.class", "fa-check")
+        cy.get("#char-special").should("have.class", "fa-check")
+
+        cy.get("#pass2").type(badConfirmPass)
+        cy.get("#pass-match").should("have.class", "fa-xmark")
+
+        cy.get("#submit").click()
+
+        cy.get("#response-card").should("have.text", "An Error has occured! Please try again.")
     })
-    */
+
+    it("re-enters forename, surname and email into form when form is invalid", function() {
+
+        cy.get("#forename").type(this.forename)
+        cy.get("#forename-str").should("have.class", "fa-check")
+        
+        cy.get("#surname").type(this.surname)
+        cy.get("#surname-str").should("have.class", "fa-check")
+        
+        cy.get("#email").type(this.email)
+        cy.get("#valid-email").should("have.class", "fa-check")
+        
+        cy.get("#pass1").type(this.password)
+        cy.get("#pass-length").should("have.class", "fa-check")
+        cy.get("#char-upper").should("have.class", "fa-check")
+        cy.get("#char-num").should("have.class", "fa-check")
+        cy.get("#char-special").should("have.class", "fa-check")
+
+        cy.get("#pass2").type(this.forename)
+        cy.get("#pass-match").should("have.class", "fa-xmark")
+
+        cy.get("#submit").click()
+
+        cy.get("#response-card").should("have.text", "An Error has occured! Please try again.")
+
+        cy.get("#forename").should("have.value", this.forename)
+        cy.get("#surname").should("have.value", this.surname)
+        cy.get("#email").should("have.value", this.email)
+        cy.get("#pass1").should("have.value", "")
+        cy.get("#pass2").should("have.value", "")
+    })
+
+    it("successfully submits the sign up form", function() {
+
+        cy.get("#forename").type(this.forename)
+        cy.get("#forename-str").should("have.class", "fa-check")
+        
+        cy.get("#surname").type(this.surname)
+        cy.get("#surname-str").should("have.class", "fa-check")
+        
+        cy.get("#email").type(this.email)
+        cy.get("#valid-email").should("have.class", "fa-check")
+        
+        cy.get("#pass1").type(this.password)
+        cy.get("#pass-length").should("have.class", "fa-check")
+        cy.get("#char-upper").should("have.class", "fa-check")
+        cy.get("#char-num").should("have.class", "fa-check")
+        cy.get("#char-special").should("have.class", "fa-check")
+
+        cy.get("#pass2").type(this.confirmPassword)
+        cy.get("#pass-match").should("have.class", "fa-check")
+
+        cy.get("#submit").click()
+
+        cy.get("#response-card").should("have.text", "You have registered successfully!")
+
+        cy.get("#forename").should("have.value", "")
+        cy.get("#surname").should("have.value", "")
+        cy.get("#email").should("have.value", "")
+        cy.get("#pass1").should("have.value", "")
+        cy.get("#pass2").should("have.value", "")
+
+        cy.get("#forename-str").should("have.class", "fa-xmark")
+        cy.get("#surname-str").should("have.class", "fa-xmark")
+        cy.get("#valid-email").should("have.class", "fa-xmark")
+        cy.get("#pass-length").should("have.class", "fa-xmark")
+        cy.get("#char-upper").should("have.class", "fa-xmark")
+        cy.get("#char-num").should("have.class", "fa-xmark")
+        cy.get("#char-special").should("have.class", "fa-xmark")
+        cy.get("#pass-match").should("have.class", "fa-xmark")
+    })
 })
