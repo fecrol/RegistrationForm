@@ -209,7 +209,6 @@ function displayResponse(response) {
         updateValidForenameIcon();
         updateValidSurnameIcon();
         updateValidEmailIcon();
-        console.log(response);
     }
     
     if(response["error"] == false) {
