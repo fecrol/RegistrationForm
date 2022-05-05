@@ -43,9 +43,7 @@ require("./functions.php");
     </div>
 
     <script>
-        response = fetchError();
-
-        displayResponse(response);
+        fetchError();
     </script>
 </body>
 </html>
