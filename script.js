@@ -172,11 +172,17 @@ function updateVerifyPasswordIcons() {
 
 function fetchError() {
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", "./getError.php", false);
-    xhr.send();
-    let errorData = JSON.parse(xhr.responseText);
-    return errorData;
+    const url = "./getError.php";
+    
+    fetch(url).then(res => res.json()).then(data => {
+        
+        if(data["error"] == true) {
+            displayError();
+        }
+        if(data["error"] == false) {
+            displaySuccess();
+        }
+    })
 }
 
 function displayError() {
