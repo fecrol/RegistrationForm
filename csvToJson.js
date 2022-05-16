@@ -8,7 +8,7 @@ function csvToJson(data) {
 
     for(let i=0; i<headers.length; i++) {
 
-        let key = headers[i].replaceAll("\"", "");
+        let key = headers[i].replace(/[^a-zA-Z]/g, "");
         let value = info[i].replaceAll("\"", "");
 
         userData[key] = value;
