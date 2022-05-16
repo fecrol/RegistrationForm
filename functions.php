@@ -113,47 +113,4 @@ function resetSessionData() {
     }
 }
 
-function getCsvData($filePath) {
-    /*
-    If the csv file path passed exists, associative array will be created with the values from the file.
-    Otherwise, the dummy values will be used to create the associative array.
-    */
-
-    $csvData = [];
-    $headers = ["forename", "surname", "email"];
-    $dummyValues = ["Maciej", "Fec", "maciej.fec@email.com"];
-    
-    if(file_exists($filePath)) {
-        $file = file_get_contents($filePath);
-        $lines = explode("\n", $file);
-        
-        if(count($lines) > 1) {
-            
-            for($i=1; $i<count($lines); $i++) {
-                $currentLine = explode(",", $lines[$i]);
-
-                for($j=0; $j<count($headers); $j++) {
-                    
-                    $key = str_replace("\"", "", $headers[$j]);
-                    $value = str_replace("\"", "", $currentLine[$j]);
-                    
-                    $csvData[$key] = $value;
-                }
-            }
-
-            return $csvData;
-        }
-    }
-
-    for($i=0; $i<count($headers); $i++) {
-
-        $key = $headers[$i];
-        $value = $dummyValues[$i];
-
-        $csvData[$key] = $value;
-    }
-
-    return $csvData;
-}
-
 ?>
